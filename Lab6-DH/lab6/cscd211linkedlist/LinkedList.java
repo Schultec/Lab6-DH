@@ -121,6 +121,15 @@ public class LinkedList<T extends Comparable <? super T>>
     */
    public int indexOf(final T item)
    {
+      if (item == null){
+         throw new IllegalArgumentException("item cannot be null");
+      }
+      Node current = this.head;
+      for (int i = 0; i<=this.size; i++){
+         if (current.data.equals(item)){
+            return i;
+         }
+      }
       return -1;
    }
    
@@ -134,7 +143,13 @@ public class LinkedList<T extends Comparable <? super T>>
     */
    public T removeFirst()
    {
-      return null;
+      if (this.size <= 0){
+         throw new NoSuchElementException("list is empty");
+      }
+      Node temp = this.head.next;
+      this.head.next = this.head.next.next;
+      size--;
+      return temp.data;
    }
    
    /** 
@@ -146,7 +161,14 @@ public class LinkedList<T extends Comparable <? super T>>
     */
    public T removeLast()
    {
-      return null;
+      if (this.size <= 0){
+         throw new NoSuchElementException("list is empty");
+      }
+      Node temp = this.head.next;
+      while (temp.next != null) {
+         temp = temp.next;
+      }
+      return temp.data;
    }
    
    /**
