@@ -68,7 +68,12 @@ public class CSCD211Lab6LinkedListMethods
     */
    public static String buildAString(final Scanner kb)
    {
-      return null;
+      if (kb == null){
+         throw new IllegalArgumentException("kb cannot be null");
+      }
+      System.out.println("please enter a string");
+      String input = kb.nextLine();
+      return input;
    }
    
    
