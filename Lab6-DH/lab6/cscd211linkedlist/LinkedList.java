@@ -61,7 +61,8 @@ public class LinkedList<T extends Comparable <? super T>>
     */
    public LinkedList()
    {
-      
+    Node newnode = new Node(null);
+    head = newnode;
    }
    
    /**
@@ -71,7 +72,15 @@ public class LinkedList<T extends Comparable <? super T>>
     */
    public int size()
    {
-      return 0;
+      int size = 0;
+      Node current = this.head;
+      do{
+         if (current.next != null){
+            current = current.next;
+         }
+         size++;
+      }while (current.next != null);
+      return size;
    }
    
    /**
@@ -80,7 +89,8 @@ public class LinkedList<T extends Comparable <? super T>>
     */
    public void clear()
    {
-   
+      this.size = 0;
+      head.next = null;
    }
    
    /**
@@ -92,7 +102,14 @@ public class LinkedList<T extends Comparable <? super T>>
     */
    public void addFirst(final T item)
    {
-     
+     if (item == null){
+        throw new IllegalArgumentException("item cannot be null");
+     }
+     Node temp = this.head.next;
+     Node newNode = new Node(item);
+     newNode.next = temp;
+     this.head.next = newNode;
+     size++;
    }
    /**
     * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
