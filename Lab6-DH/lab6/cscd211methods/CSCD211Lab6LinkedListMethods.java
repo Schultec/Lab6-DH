@@ -88,7 +88,17 @@ public class CSCD211Lab6LinkedListMethods
     */
    public static int readIndex(final Scanner kb)
    {
-      return 0;
+      if (kb == null){
+         throw new IllegalArgumentException("kb cannot be null");
+      }
+      int index = -1;
+      do{
+         index = Integer.parseInt(kb.nextLine());
+         if (index < 0){
+            System.out.println("please enter a valid index");
+         }
+      }while (index < 0);
+      return index;
    }
    
    
