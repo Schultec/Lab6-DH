@@ -167,9 +167,9 @@ public class LinkedList<T extends Comparable <? super T>>
       Node temp = this.head;
       Node current = this.head;
       while (current.next.next != null) {
-         temp = current.next.next
-         current.next = null;
+         temp = current.next.next;
       }
+      current.next = null;
       size--;
       return temp.data;
    }
@@ -189,13 +189,16 @@ public class LinkedList<T extends Comparable <? super T>>
       if (index < 0 || index >= size()) {
          throw new IndexOutOfBoundsException("index is out of range");
       }
-      Node temp = this.head;
       Node current = this.head;
-      for (int i = 0; i < index; i++){
+      Node temp;
+      for (int i = 0; i < index - 1; i++){
          current = current.next;
       }
+      temp = current.next;
+      current.next = current.next.next;
+      size--;
 
-      return null;
+      return temp.data;
    }
    
    /**
@@ -211,6 +214,22 @@ public class LinkedList<T extends Comparable <? super T>>
     */
    public void add(final int index, final T item)
    {
+      if (index < 0 || index >= size()) {
+         throw new IndexOutOfBoundsException("index is out of range");
+      }
+      if (item == null){
+         throw new IllegalArgumentException("item cannot be null");
+      }
+      Node current = this.head;
+      Node temp;
+      for (int i = 0; i < index - 1; i++){
+         current = current.next;
+      }
+      size++;
+      temp = current.next;
+      Node newnode = new Node(item);
+      current.next = newnode;
+      newnode.next = temp;
 
    }
    
@@ -224,8 +243,28 @@ public class LinkedList<T extends Comparable <? super T>>
     *
     * @throws IllegalArgumentException if item is null
     */ 
-   public boolean removeLastOccurrence(final T item)
-   {
+   public boolean removeLastOccurrence(final T item) {
+      if (item == null) {
+         throw new IllegalArgumentException("item cannot be null");
+      }
+      int count = 0, index = 0, i = 0;
+      Node temp = this.head;
+      Node current = this.head;
+      if (contains(item)){
+         while (current.next != null) {
+            if (current.data.equals(item)){
+               count++;
+            }
+         }
+         while (i < count || temp.next != null){
+            temp = temp.next;
+            index++;
+            if (temp.data.equals(item)) {
+               i++;
+            }
+         }
+         remove(index);
+      }
       return false;
    }
 
@@ -241,6 +280,13 @@ public class LinkedList<T extends Comparable <? super T>>
     */ 
    public boolean removeFirstOccurrence(final T item)
    {
+      if (item == null){
+         throw new IllegalArgumentException("item cannot be null");
+      }
+      if (contains(item)) {
+         remove(indexOf(item));
+         return true;
+      }
       return false;
    }
 
@@ -253,7 +299,17 @@ public class LinkedList<T extends Comparable <? super T>>
     */
    public void addLast(final T item)
    {
-
+      if (item == null){
+         throw new IllegalArgumentException("item cannot be null");
+      }
+      Node current = this.head;
+      while (current.next != null) {
+         current = current.next;
+      }
+      Node newnode = new Node(item);
+      current.next = newnode;
+      newnode.next = null;
+      size++;
    }
 
    /**
@@ -293,6 +349,9 @@ public class LinkedList<T extends Comparable <? super T>>
     */
    public boolean contains(final T item)
    {
+      if (item == null){
+         throw new IllegalArgumentException("item cannot be null");
+      }
       Node current = this.head;
       while (current.next != null){
          if (current.data.equals(item)){
