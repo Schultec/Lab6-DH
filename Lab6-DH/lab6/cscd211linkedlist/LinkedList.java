@@ -164,10 +164,13 @@ public class LinkedList<T extends Comparable <? super T>>
       if (this.size <= 0){
          throw new NoSuchElementException("list is empty");
       }
-      Node temp = this.head.next;
-      while (temp.next != null) {
-         temp = temp.next;
+      Node temp = this.head;
+      Node current = this.head;
+      while (current.next.next != null) {
+         temp = current.next.next
+         current.next = null;
       }
+      size--;
       return temp.data;
    }
    
@@ -183,6 +186,15 @@ public class LinkedList<T extends Comparable <? super T>>
     */   
    public T remove(final int index)
    {
+      if (index < 0 || index >= size()) {
+         throw new IndexOutOfBoundsException("index is out of range");
+      }
+      Node temp = this.head;
+      Node current = this.head;
+      for (int i = 0; i < index; i++){
+         current = current.next;
+      }
+
       return null;
    }
    
@@ -250,9 +262,23 @@ public class LinkedList<T extends Comparable <? super T>>
     *
     * @return String - Representing the contents of the list
     */
-   public String toString()
-   {
-      return "";
+   public String toString() {
+      StringBuilder result = new StringBuilder("[");
+      Node curr = head;
+      String fin;
+      for(int i=0;i<size;i++){
+         result.append(curr.data);
+         curr=curr.next;
+         if(curr != null)
+            result.append(", ");
+         else
+            result.append("]");
+      }
+      fin = result.toString();
+      if (size == 0){
+         fin = "list is empty";
+      }
+      return fin;
    }
    
    /**
@@ -267,9 +293,12 @@ public class LinkedList<T extends Comparable <? super T>>
     */
    public boolean contains(final T item)
    {
+      Node current = this.head;
+      while (current.next != null){
+         if (current.data.equals(item)){
+            return true;
+         }
+      }
       return false;
    }
-   
-   
-
 }
