@@ -125,10 +125,11 @@ public class LinkedList<T extends Comparable <? super T>>
          throw new IllegalArgumentException("item cannot be null");
       }
       Node current = this.head.next;
-      for (int i = 1; i<=this.size; i++){
+      for (int i = 0; i<=this.size; i++){
          if (current.data.equals(item)){
             return i;
          }
+         current = current.next;
       }
       return -1;
    }
@@ -186,7 +187,7 @@ public class LinkedList<T extends Comparable <? super T>>
     */   
    public T remove(final int index)
    {
-      if (index < 0 || index >= size()) {
+      if (index < 0 || index >= this.size) {
          throw new IndexOutOfBoundsException("index is out of range");
       }
       Node current = this.head;
@@ -256,7 +257,7 @@ public class LinkedList<T extends Comparable <? super T>>
                count++;
             }
          }
-         while (i < count || temp.next != null){
+         while (i < count){
             temp = temp.next;
             index++;
             if (temp.data.equals(item)) {
@@ -334,6 +335,7 @@ public class LinkedList<T extends Comparable <? super T>>
       if (size == 0){
          fin = "list is empty";
       }
+      System.out.println("size = "+ this.size);
       return fin;
    }
    
