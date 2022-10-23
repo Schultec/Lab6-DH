@@ -72,7 +72,7 @@ public class LinkedList<T extends Comparable <? super T>>
     */
    public int size()
    {
-      int size = 0;
+      this.size = 0;
       Node current = this.head;
       do{
          if (current.next != null){
@@ -124,8 +124,8 @@ public class LinkedList<T extends Comparable <? super T>>
       if (item == null){
          throw new IllegalArgumentException("item cannot be null");
       }
-      Node current = this.head;
-      for (int i = 0; i<=this.size; i++){
+      Node current = this.head.next;
+      for (int i = 1; i<=this.size; i++){
          if (current.data.equals(item)){
             return i;
          }
@@ -352,11 +352,15 @@ public class LinkedList<T extends Comparable <? super T>>
       if (item == null){
          throw new IllegalArgumentException("item cannot be null");
       }
-      Node current = this.head;
+      Node current = this.head.next;
       while (current.next != null){
          if (current.data.equals(item)){
             return true;
          }
+         current = current.next;
+      }
+      if (current.data.equals(item)){
+         return (true);
       }
       return false;
    }
