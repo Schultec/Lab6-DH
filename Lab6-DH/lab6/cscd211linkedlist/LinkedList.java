@@ -320,7 +320,7 @@ public class LinkedList<T extends Comparable <? super T>>
     */
    public String toString() {
       StringBuilder result = new StringBuilder("[");
-      Node curr = head;
+      Node curr = head.next;
       String fin;
       for(int i=1;i<size;i++){
          result.append(curr.data);
