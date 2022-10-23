@@ -322,7 +322,7 @@ public class LinkedList<T extends Comparable <? super T>>
       StringBuilder result = new StringBuilder("[");
       Node curr = head.next;
       String fin;
-      for(int i=1;i<size;i++){
+      for(int i=0;i<size;i++){
          result.append(curr.data);
          curr=curr.next;
          if(curr != null)
