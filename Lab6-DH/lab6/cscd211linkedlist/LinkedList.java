@@ -248,8 +248,8 @@ public class LinkedList<T extends Comparable <? super T>>
          throw new IllegalArgumentException("item cannot be null");
       }
       int count = 0, index = 0, i = 0;
-      Node temp = this.head;
-      Node current = this.head;
+      Node temp = this.head.next;
+      Node current = this.head.next;
       if (contains(item)){
          while (current.next != null) {
             if (current.data.equals(item)){
